@@ -13,11 +13,16 @@ password = storage.getfirst("password")
 
 print("Content-Type: text/html")
 cookie = SimpleCookie(os.environ['HTTP_COOKIE'])
-cookie_sername = cookie.get('username').value
-cookie_password = cookie.get('password').value
-
-if cookie_sername == secret.username and cookie_password == secret.password:
-	username = cookie_sername
+if cookie.get('username'):
+	cookie_username = cookie.get('username').value
+else:
+	cookie_username = None
+if cookie.get('username'):
+	cookie_password = cookie.get('password').value
+else:
+	cookie_password = None
+if cookie_username == secret.username and cookie_password == secret.password:
+	username = cookie_username
 	password = cookie_password
 
 if username == secret.username and password == secret.password:
